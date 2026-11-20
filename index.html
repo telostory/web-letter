@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>손글씨 엽서 · web-letter</title>
+<link rel="preload" href="fonts/JunHand-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%89%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="top">
+  <h1>손글씨 엽서</h1>
+  <p class="sub">엽서(148×100mm)에 바로 타이핑하세요. 글씨는 JunHand 손글씨 폰트로 써져요.</p>
+</header>
+
+<main class="layout">
+  <section class="stage" aria-label="엽서">
+    <div id="card" class="card paper-cream lines-ruled landscape">
+      <div class="sheet"><textarea id="text" spellcheck="false" aria-label="편지 내용" placeholder="여기에 편지를 써 보세요…"></textarea></div>
+    </div>
+    <div class="status">
+      <span id="count">0자</span>
+      <span id="overflow" class="warn" hidden>엽서를 넘쳤어요. 글자 크기를 줄이거나 내용을 줄여 주세요.</span>
+    </div>
+    <div class="actions">
+      <button id="savePng" class="primary">PNG로 저장</button>
+      <button id="print">인쇄 · PDF</button>
+      <button id="clear" class="ghost">새로 쓰기</button>
+    </div>
+  </section>
+
+  <aside class="panel" aria-label="설정">
+    <fieldset>
+      <legend>글씨</legend>
+      <label class="row">
+        <span>크기 <output id="sizeOut"></output></span>
+        <input id="size" type="range" min="3.5" max="9" step="0.1" value="5.2">
+      </label>
+      <label class="row">
+        <span>자간 <output id="trackOut"></output></span>
+        <input id="track" type="range" min="-0.08" max="0.2" step="0.01" value="0">
+      </label>
+      <label class="row">
+        <span>장평 <output id="stretchOut"></output></span>
+        <input id="stretch" type="range" min="0.75" max="1.25" step="0.01" value="1">
+      </label>
+      <label class="row">
+        <span>줄 간격 <output id="leadOut"></output></span>
+        <input id="lead" type="range" min="1.3" max="2.4" step="0.05" value="1.8">
+      </label>
+      <div class="row">
+        <span>굵기</span>
+        <div class="seg" role="radiogroup" id="weight">
+          <button data-v="400" aria-pressed="true">보통</button>
+          <button data-v="300" aria-pressed="false">가늘게</button>
+        </div>
+      </div>
+      <div class="row">
+        <span>색상</span>
+        <div class="swatches" id="ink">
+          <button data-v="#1d1d1f" style="--c:#1d1d1f" aria-label="검정" aria-pressed="true"></button>
+          <button data-v="#1f3a68" style="--c:#1f3a68" aria-label="남색" aria-pressed="false"></button>
+          <button data-v="#6b4226" style="--c:#6b4226" aria-label="갈색" aria-pressed="false"></button>
+          <button data-v="#b3261e" style="--c:#b3261e" aria-label="빨강" aria-pressed="false"></button>
+          <button data-v="#2e6b45" style="--c:#2e6b45" aria-label="초록" aria-pressed="false"></button>
+          <label class="picker" aria-label="직접 고르기"><input id="inkCustom" type="color" value="#1d1d1f"></label>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>엽서</legend>
+      <div class="row">
+        <span>종이</span>
+        <div class="seg" id="paper">
+          <button data-v="cream" aria-pressed="true">크림</button>
+          <button data-v="white" aria-pressed="false">화이트</button>
+          <button data-v="kraft" aria-pressed="false">크라프트</button>
+          <button data-v="sky" aria-pressed="false">하늘</button>
+        </div>
+      </div>
+      <div class="row">
+        <span>선</span>
+        <div class="seg" id="lines">
+          <button data-v="ruled" aria-pressed="true">줄</button>
+          <button data-v="grid" aria-pressed="false">모눈</button>
+          <button data-v="none" aria-pressed="false">없음</button>
+        </div>
+      </div>
+      <div class="row">
+        <span>방향</span>
+        <div class="seg" id="orient">
+          <button data-v="landscape" aria-pressed="true">가로</button>
+          <button data-v="portrait" aria-pressed="false">세로</button>
+        </div>
+      </div>
+    </fieldset>
+    <button id="reset" class="ghost small">설정 초기화</button>
+  </aside>
+</main>
+
+<footer class="foot">글씨체: JunHand (준 손글씨) · 작성한 내용은 이 브라우저에만 저장돼요.</footer>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+@font-face {
+  font-family: "JunHand";
+  src: url("fonts/JunHand-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JunHand";
+  src: url("fonts/JunHand-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-display: swap;
+}
+
+:root {
+  --bg: #f3f1ec;
+  --panel: #ffffff;
+  --text: #2a2a2a;
+  --muted: #7a776f;
+  --line: #e2ded4;
+  --accent: #3b5bdb;
+
+  /* 편지 설정 (app.js가 바꿈) */
+  --k: 5.2;        /* 글자 크기: 엽서 긴 변(148mm)의 % */
+  --lh: 1.8;       /* 줄 간격 */
+  --ls: 0;         /* 자간 (em) */
+  --sx: 1;         /* 장평 */
+  --ink: #1d1d1f;
+  --w: 400;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.top { max-width: 1080px; margin: 0 auto; padding: 28px 20px 8px; }
+.top h1 { margin: 0; font-size: 22px; letter-spacing: -0.01em; }
+.sub { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+
+.layout {
+  max-width: 1080px; margin: 0 auto; padding: 16px 20px 32px;
+  display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 24px; align-items: start;
+}
+@media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+
+/* ---------- 엽서 ---------- */
+.stage { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.card {
+  --u: 1cqw;                      /* 1% of 148mm */
+  container-type: inline-size;
+  position: relative;
+  width: min(100%, 680px);
+  aspect-ratio: 148 / 100;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 28px rgba(0,0,0,.10);
+  overflow: hidden;
+  background: var(--paper);
+}
+.card.portrait { width: min(100%, 460px); aspect-ratio: 100 / 148; --u: 1.48cqw; }
+
+.paper-cream { --paper: #fbf6ea; --rule: rgba(120, 100, 70, .22); }
+.paper-white { --paper: #ffffff; --rule: rgba(60, 80, 120, .16); }
+.paper-kraft { --paper: #dcc5a0; --rule: rgba(80, 55, 25, .28); }
+.paper-sky   { --paper: #eaf2fa; --rule: rgba(50, 90, 140, .22); }
+
+/* 쓰는 영역: 안쪽 여백 */
+.card { --pt: calc(7 * var(--u)); --px: calc(7.5 * var(--u)); --pb: calc(6 * var(--u)); }
+.card .sheet {
+  position: absolute;
+  top: var(--pt); left: var(--px); right: var(--px); bottom: var(--pb);
+  overflow: hidden;
+  --L: calc(var(--k) * var(--u) * var(--lh));   /* 한 줄 높이 */
+}
+.lines-ruled .sheet {
+  background-image: linear-gradient(to bottom, transparent calc(76% - 0.5px), var(--rule) calc(76% - 0.5px), var(--rule) calc(76% + 0.5px), transparent calc(76% + 0.5px));
+  background-size: 100% var(--L);
+}
+.lines-grid .sheet {
+  background-image:
+    linear-gradient(to bottom, transparent calc(100% - 1px), var(--rule) calc(100% - 1px)),
+    linear-gradient(to right, transparent calc(100% - 1px), var(--rule) calc(100% - 1px));
+  background-size: var(--L) var(--L), var(--L) var(--L);
+}
+
+.card textarea {
+  position: absolute; top: 0; left: 0;
+  width: calc(100% / var(--sx));        /* 장평: 넓게 쓰고 가로로 눌러 담음 */
+  height: 100%;
+  transform: scaleX(var(--sx));
+  transform-origin: 0 0;
+  margin: 0; padding: 0; border: 0; outline: none; resize: none;
+  background: transparent;
+  overflow: hidden;
+  color: var(--ink);
+  caret-color: var(--ink);
+  font-family: "JunHand", sans-serif;
+  font-weight: var(--w);
+  font-size: calc(var(--k) * var(--u));
+  line-height: var(--lh);
+  letter-spacing: calc(var(--ls) * 1em);
+  font-kerning: none;
+  white-space: pre-wrap;
+  word-break: break-all;        /* 글자 단위 줄바꿈: PNG 저장과 같은 규칙 */
+  overflow-wrap: anywhere;
+}
+.card textarea::placeholder { color: color-mix(in srgb, var(--ink) 35%, transparent); }
+
+.status { width: min(100%, 680px); display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--muted); }
+.warn { color: #b3261e; }
+
+.actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+button {
+  font: inherit; font-size: 14px;
+  border: 1px solid var(--line); background: var(--panel); color: var(--text);
+  padding: 9px 16px; border-radius: 8px; cursor: pointer;
+}
+button:hover { border-color: #c9c4b8; }
+button.primary { background: var(--text); color: #fff; border-color: var(--text); }
+button.ghost { background: transparent; }
+button.small { font-size: 13px; padding: 6px 12px; }
+
+/* ---------- 설정 패널 ---------- */
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+fieldset { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+legend { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.row { display: flex; flex-direction: column; gap: 6px; font-size: 13px; }
+.row > span { display: flex; justify-content: space-between; color: var(--muted); }
+output { color: var(--text); font-variant-numeric: tabular-nums; }
+input[type=range] { width: 100%; accent-color: var(--text); }
+
+.seg { display: flex; flex-wrap: wrap; gap: 4px; }
+.seg button { padding: 6px 10px; font-size: 13px; }
+.seg button[aria-pressed=true] { background: var(--text); color: #fff; border-color: var(--text); }
+
+.swatches { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.swatches button { width: 26px; height: 26px; padding: 0; border-radius: 50%; background: var(--c); border: 2px solid #fff; box-shadow: 0 0 0 1px var(--line); }
+.swatches button[aria-pressed=true] { box-shadow: 0 0 0 2px var(--text); }
+.picker { position: relative; width: 26px; height: 26px; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 1px var(--line);
+  background: conic-gradient(red, yellow, lime, cyan, blue, magenta, red); cursor: pointer; }
+.picker input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+.foot { max-width: 1080px; margin: 0 auto; padding: 0 20px 32px; color: var(--muted); font-size: 12px; }
+
+/* ---------- 인쇄: 엽서 한 장만 실제 크기로 ---------- */
+@page { size: 148mm 100mm; margin: 0; }
+@media print {
+  body { background: none; }
+  .top, .panel, .status, .actions, .foot { display: none !important; }
+  .layout { display: block; padding: 0; max-width: none; }
+  .card { width: 148mm; box-shadow: none; border-radius: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .card textarea::placeholder { color: transparent; }
+}
