@@ -1,12 +1,12 @@
 @font-face {
   font-family: "JunHand";
-  src: url("fonts/JunHand-Regular.woff2") format("woff2");
+  src: url("fonts/JunHand-Regular.woff2?v=1.6") format("woff2");
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
   font-family: "JunHand";
-  src: url("fonts/JunHand-Light.woff2") format("woff2");
+  src: url("fonts/JunHand-Light.woff2?v=1.6") format("woff2");
   font-weight: 300;
   font-display: swap;
 }
@@ -141,6 +141,18 @@ input[type=range] { width: 100%; accent-color: var(--text); }
 .picker { position: relative; width: 26px; height: 26px; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 1px var(--line);
   background: conic-gradient(red, yellow, lime, cyan, blue, magenta, red); cursor: pointer; }
 .picker input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+.download { gap: 8px; }
+hr.sep { border: 0; border-top: 1px solid var(--line); margin: 2px 0; width: 100%; }
+.download .ver { font-weight: 400; color: var(--muted); font-size: 12px; margin-left: 4px; }
+.hint { margin: 0; font-size: 12px; color: var(--muted); line-height: 1.5; }
+a.dl {
+  display: block; text-align: center; text-decoration: none; font-size: 13px;
+  border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; color: var(--text); background: var(--panel);
+}
+a.dl:hover { border-color: #c9c4b8; }
+a.dl.primary { background: var(--text); color: #fff; border-color: var(--text); }
+.dl-row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 
 .foot { max-width: 1080px; margin: 0 auto; padding: 0 20px 32px; color: var(--muted); font-size: 12px; }
 

@@ -12,13 +12,18 @@
 - 쓰던 내용과 설정은 브라우저에 자동 저장 (서버로 보내지 않음)
 - 내용이 엽서를 넘치면 경고
 
+## 폰트 내려받기
+
+`download/` 폴더에 설치용 TTF(보통·가늘게)와 ZIP이 있고, 페이지 설정 패널에서도 받을 수 있다. 현재 버전: 1.6
+
 ## 구조
 
 ```
 index.html   화면
 style.css    엽서·설정 패널 스타일, 인쇄 규칙
 app.js       설정 적용, 자동 저장, PNG 저장
-fonts/       JunHand-Regular.woff2, JunHand-Light.woff2 (한글 11,172자 + 영문·기호)
+fonts/       JunHand-Regular.woff2, JunHand-Light.woff2 (웹 표시용)
+download/    JunHand-Regular.ttf, JunHand-Light.ttf, JunHand-1.6.zip (설치용)
 ```
 
 빌드 과정 없이 정적 파일만으로 동작한다. GitHub Pages(main 브랜치 루트)로 배포.
