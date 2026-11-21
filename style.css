@@ -1,12 +1,12 @@
 @font-face {
   font-family: "JunHand";
-  src: url("fonts/JunHand-Regular.woff2?v=1.6") format("woff2");
+  src: url("fonts/JunHand-Regular.woff2?v=1.7") format("woff2");
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
   font-family: "JunHand";
-  src: url("fonts/JunHand-Light.woff2?v=1.6") format("woff2");
+  src: url("fonts/JunHand-Light.woff2?v=1.7") format("woff2");
   font-weight: 300;
   font-display: swap;
 }
